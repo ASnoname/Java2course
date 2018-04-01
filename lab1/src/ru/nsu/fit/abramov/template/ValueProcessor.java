@@ -10,9 +10,10 @@ public class ValueProcessor implements TemplateProcessor{
     }
 
     @Override
-    public void fillTemplate(StringBuilder sb, Map<String, String> values, Map<String, Boolean> conditions, Map<String, Integer> iterations) throws IfRepeatNameException {
-        if (values.get(value) == null && values != null){
-            throw  new IfRepeatNameException("ArgumentNotFoundException");
+    public void fillTemplate(StringBuilder sb, Map<String, String> values, Map<String, Boolean> conditions, Map<String, Integer> iterations) throws MyException {
+        if (iterations == null) return;
+        if (values.get(value) == null){
+            throw  new MyException("ArgumentNotFoundException");
         }
         sb.append(values.get(value));
     }

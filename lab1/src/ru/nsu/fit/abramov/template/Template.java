@@ -7,7 +7,7 @@ class Template {
 
     private LinkedList<TemplateProcessor> interfaceBlocks;
 
-    Template(String inString) throws IfRepeatNameException {
+    Template(String inString) throws MyException {
         interfaceBlocks = new LinkedList<>();
         processorsBlocks(blocks(inString));
     }
@@ -33,7 +33,7 @@ class Template {
         }
     }
 
-    private void processorsBlocks(LinkedList<String> blocks) throws IfRepeatNameException {
+    private void processorsBlocks(LinkedList<String> blocks) throws MyException {
         ListIterator<String> thisBlock = blocks.listIterator();
         while (thisBlock.hasNext()){
             thisBlock.next();
@@ -44,7 +44,7 @@ class Template {
                 String content = thisBlock.previous();
                 String ifCond = thisBlock.previous();
                 if (ifCond.charAt(0) != '!' && ifCond.charAt(ifCond.length()-1) != '!'){
-                    throw  new IfRepeatNameException("ArgumentNotFoundException");
+                    throw  new MyException("ArgumentNotFoundException");
                 }
                 interfaceBlocks.addFirst(new ConditionProcessor(content,ifCond.substring("!if ".length(),ifCond.length()-1)));
                 addBlockBoolean(blockBoolean,true,3);
@@ -55,7 +55,7 @@ class Template {
                 String content = thisBlock.previous();
                 String iteration = thisBlock.previous();
                 if (iteration.charAt(0) != '!' && iteration.charAt(iteration.length()-1) != '!'){
-                    throw  new IfRepeatNameException("ArgumentNotFoundException\n");
+                    throw  new MyException("ArgumentNotFoundException\n");
                 }
                 interfaceBlocks.addFirst(new RepeatProcessor(content, iteration.substring("!repeat ".length(),iteration.length() - 1)));
                 addBlockBoolean(blockBoolean,true,3);
@@ -85,7 +85,7 @@ class Template {
         }
     }
 
-    String fill(Map<String, String> values, Map<String, Boolean> conditions, Map<String, Integer> iterations) throws IfRepeatNameException {
+    String fill(Map<String, String> values, Map<String, Boolean> conditions, Map<String, Integer> iterations) throws MyException {
         StringBuilder makeOutString = new StringBuilder();
         for (TemplateProcessor interfaceBlock : interfaceBlocks) {
             interfaceBlock.fillTemplate(makeOutString, values, conditions, iterations);

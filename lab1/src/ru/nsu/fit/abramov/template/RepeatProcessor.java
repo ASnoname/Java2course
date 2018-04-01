@@ -12,9 +12,10 @@ public class RepeatProcessor implements TemplateProcessor{
     }
 
     @Override
-    public void fillTemplate(StringBuilder sb, Map<String, String> values, Map<String, Boolean> conditions, Map<String, Integer> iterations) throws IfRepeatNameException {
-        if (iterations.get(iterationP) == null && iterations != null){
-            throw  new IfRepeatNameException("ArgumentNotFoundException");
+    public void fillTemplate(StringBuilder sb, Map<String, String> values, Map<String, Boolean> conditions, Map<String, Integer> iterations) throws MyException {
+        if (iterations == null) return;
+        if (iterations.get(iterationP) == null) {
+            throw new MyException("ArgumentNotFoundException");
         }
         for (int i = 0; i < iterations.get(iterationP); i++) {
             sb.append(contentP);
