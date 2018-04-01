@@ -18,7 +18,7 @@ class Template {
         blocks.addLast(splitBlocks[0]);
         for (int i = 1; i < splitBlocks.length; i++) {
             if (splitBlocks[i-1].endsWith("\\")){
-                blocks.addLast(blocks.removeLast().concat("%").concat(splitBlocks[i]));
+                blocks.addLast(blocks.removeLast().concat("%").concat(splitBlocks[i]).replace("\\%","%"));
             }
             else {
                 blocks.addLast(splitBlocks[i]);

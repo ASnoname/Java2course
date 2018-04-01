@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws MyException {
-        Template t = new Template("<h1>Hello!</h1><h2>%!if isUser!% Welcome back %!endif!%</h2>%!repeat redbull!%burn%!endrepeat!%");
+        Template t = new Template("\\%\\%");
         Map<String, String> values = new HashMap<>();
         values.put("name", "Vasya");
         Map<String, Boolean> conditions = new HashMap<>();
